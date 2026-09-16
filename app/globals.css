@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------
+   Palette: deep teal ground, warm brass accent, bone paper.
+   Semantic variables so light/dark swap in one place.
+----------------------------------------------------------------*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f4f1e8;
+  --surface: #ece7da;
+  --text: #11312e;
+  --muted: #5a716d;
+  --line: #d6cfbe;
+  --accent: #a56a14;
+  --accent-soft: #e6d3ae;
+}
+
+.dark {
+  --bg: #0b2321;
+  --surface: #113330;
+  --text: #ece7da;
+  --muted: #8ba9a3;
+  --line: #1d433f;
+  --accent: #d9a444;
+  --accent-soft: #23524c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  /* stops anchor links from hiding section headings under the nav */
+  scroll-padding-top: 6rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Keyboard focus stays visible everywhere. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
