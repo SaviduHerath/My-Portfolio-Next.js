@@ -9,7 +9,7 @@ export const profile = {
   phone: "+94 71 067 5594",
   github: "https://github.com/SaviduHerath",
   linkedin: "www.linkedin.com/in/savidu-herath-105442385",
-  cv: "/Savidu_Herath_CVnnn.pdf",
+  cv: "/Savidu_Herath_CV.pdf",
   site: "https://saviduherath.dev",
 
   // Hero
