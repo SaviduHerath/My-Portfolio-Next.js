@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { nav, profile } from "@/data/portfolio";
@@ -8,15 +8,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Nav() {
   const { resolvedTheme, setTheme } = useTheme();
-  const mounted = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
+  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -33,11 +30,9 @@ export default function Nav() {
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         {/* Logo */}
-        <a href="#top" className="font-display text-lg font-bold tracking-tight group">
+        <a href="#top" className="font-display text-lg font-bold tracking-tight group flex items-center">
           <span className="shimmer-text">{profile.name.split(" ")[0]}</span>
-          <span className="text-[var(--accent-3)] transition-opacity group-hover:opacity-80">
-            .dev
-          </span>
+          <span className="text-[var(--accent-3)] transition-opacity group-hover:opacity-80">.dev</span>
         </a>
 
         {/* Desktop nav */}
@@ -65,35 +60,35 @@ export default function Nav() {
             CV
           </a>
 
-          <button
-            type="button"
-            aria-label="Switch colour theme"
-            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="ml-1 rounded-lg p-2 text-[var(--muted)] transition-all hover:text-[var(--accent)] hover:bg-[var(--accent-soft)]"
-          >
-            {mounted && resolvedTheme === "dark" ? (
-              <Sun size={18} />
-            ) : (
-              <Moon size={18} />
-            )}
-          </button>
+          {mounted && (
+            <button
+              type="button"
+              aria-label="Switch colour theme"
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              className="ml-1 rounded-lg p-2 text-[var(--muted)] transition-all hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] flex items-center justify-center"
+            >
+              {resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          )}
         </nav>
 
         {/* Mobile controls */}
         <div className="flex sm:hidden items-center gap-2">
-          <button
-            type="button"
-            aria-label="Switch colour theme"
-            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="rounded-lg p-2 text-[var(--muted)] hover:text-[var(--accent)]"
-          >
-            {mounted && resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+          {mounted && (
+            <button
+              type="button"
+              aria-label="Switch colour theme"
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              className="rounded-lg p-2 text-[var(--muted)] hover:text-[var(--accent)] flex items-center justify-center"
+            >
+              {resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          )}
           <button
             type="button"
             aria-label="Toggle menu"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="rounded-lg p-2 text-[var(--muted)] hover:text-[var(--accent)]"
+            className="rounded-lg p-2 text-[var(--muted)] hover:text-[var(--accent)] flex items-center justify-center"
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
