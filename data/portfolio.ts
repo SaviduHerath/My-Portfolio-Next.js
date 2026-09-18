@@ -77,6 +77,25 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "cafe-management",
+    title: "Full-Stack Cafe Management & Digital Ordering System",
+    kind: "Full-stack web app",
+    year: "2026",
+    summary:
+      "A unified web platform that seamlessly connects customer orders with kitchen operations in real-time, providing customers with an intuitive browsing and checkout experience while giving staff immediate visibility into incoming orders.",
+    problem:
+      "Traditional cafes struggle with disjointed physical menus and manual order taking, leading to bottlenecks during peak hours.",
+    stack: ["React", "Express", "Node.js", "MongoDB", "Stripe", "Vite"],
+    highlights: [
+      "Decoupled architecture: independent customer-facing and admin React applications communicating with a centralised Express/Node.js REST API.",
+      "Secure authentication engine: using JSON Web Tokens (JWT) for robust session management and role-based access control across both customer and admin portals.",
+      "Integrated payment processing: via the Stripe API, enabling secure, frictionless, and compliant checkout flows directly within the application.",
+      "Scalable data layer: powered by MongoDB and Mongoose, providing flexible document storage for dynamic menu items, user profiles, and real-time order histories.",
+      "High-performance clients: Responsive Single-Page Applications (SPAs) built with Vite and React, ensuring rapid load times, hot module replacement (HMR), and smooth, app-like transitions across all devices.",
+    ],
+    github: "https://github.com/SaviduHerath/Cafe-KIRIKOPI.git",
+  },
+  {
     slug: "offline-sync",
     title: "Offline-First Inventory & Live Sync",
     kind: "Distributed system",
