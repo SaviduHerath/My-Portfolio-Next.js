@@ -4,6 +4,7 @@ import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, CodeXml, Link, Mail } from "lucide-react";
 import { profile } from "@/data/portfolio";
+import Image from "next/image";
 
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
 
@@ -69,78 +70,112 @@ export default function Hero() {
         style={{ background: "var(--grad-hero)" }}
       />
 
-      <motion.div variants={container} initial="hidden" animate="show">
-        {/* Eyebrow */}
-        <motion.div variants={item} className="flex items-center gap-3 mb-8">
-          <span className="h-px w-8 bg-[var(--accent)]" />
-          <span className="text-sm font-semibold tracking-widest uppercase text-[var(--accent)]">
-            {profile.role}
-          </span>
-        </motion.div>
+      <motion.div variants={container} initial="hidden" animate="show" className="flex flex-col gap-16">
+        <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-8 items-center lg:items-start justify-between">
+          {/* Left Column (Text content) */}
+          <div className="flex-1 w-full max-w-3xl">
+            {/* Eyebrow */}
+            <motion.div variants={item} className="flex items-center gap-3 mb-8">
+              <span className="h-px w-8 bg-[var(--accent)]" />
+              <span className="text-sm font-semibold tracking-widest uppercase text-[var(--accent)]">
+                {profile.role}
+              </span>
+            </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          variants={item}
-          className="font-display max-w-3xl text-4xl font-bold leading-[1.06] tracking-[-0.03em] sm:text-6xl lg:text-7xl"
-        >
-          <span className="text-[var(--text)]">I build systems that{" "}</span>
-          <span className="shimmer-text">keep working</span>
-          <span className="text-[var(--text)]">{" "}when the network doesn&apos;t.</span>
-        </motion.h1>
-
-        {/* Intro */}
-        <motion.p
-          variants={item}
-          className="mt-8 max-w-[62ch] text-base leading-relaxed text-[var(--muted)] sm:text-lg"
-        >
-          {profile.intro}
-        </motion.p>
-
-        {/* Location pill */}
-        <motion.div variants={item} className="mt-4">
-          <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] border border-[var(--glass-border)] px-4 py-1.5 text-xs font-medium text-[var(--muted)]">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            {profile.location} · Available for internships
-          </span>
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
-          <a href="#work" className="btn-primary">
-            <ArrowDown size={16} />
-            See the work
-          </a>
-          <a href={`mailto:${profile.email}`} className="btn-outline">
-            <Mail size={16} />
-            Get in touch
-          </a>
-
-          <div className="ml-auto flex items-center gap-3">
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="rounded-lg p-2 text-[var(--muted)] transition-all hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] hover:shadow-[0_0_14px_var(--accent-glow)]"
+            {/* Headline */}
+            <motion.h1
+              variants={item}
+              className="font-display max-w-3xl text-4xl font-bold leading-[1.06] tracking-[-0.03em] sm:text-6xl lg:text-7xl"
             >
-              <CodeXml size={20} /> 
-            </a>
-            <a
-              href={profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="rounded-lg p-2 text-[var(--muted)] transition-all hover:text-[var(--accent-2)] hover:bg-[rgba(139,92,246,0.1)] hover:shadow-[0_0_14px_rgba(139,92,246,0.4)]"
+              <span className="text-[var(--text)]">I build systems that{" "}</span>
+              <span className="shimmer-text">keep working</span>
+              <span className="text-[var(--text)]">{" "}when the network doesn&apos;t.</span>
+            </motion.h1>
+
+            {/* Intro */}
+            <motion.p
+              variants={item}
+              className="mt-8 max-w-[62ch] text-base leading-relaxed text-[var(--muted)] sm:text-lg"
             >
-              <Link size={20} /> 
-            </a>
+              {profile.intro}
+            </motion.p>
+
+            {/* Location pill */}
+            <motion.div variants={item} className="mt-4">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-soft)] border border-[var(--glass-border)] px-4 py-1.5 text-xs font-medium text-[var(--muted)]">
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                {profile.location} · Available for internships
+              </span>
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
+              <a href="#work" className="btn-primary">
+                <ArrowDown size={16} />
+                See the work
+              </a>
+              <a href={`mailto:${profile.email}`} className="btn-outline">
+                <Mail size={16} />
+                Get in touch
+              </a>
+
+              <div className="ml-auto flex items-center gap-3">
+                <a
+                  href={profile.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="rounded-lg p-2 text-[var(--muted)] transition-all hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] hover:shadow-[0_0_14px_var(--accent-glow)]"
+                >
+                  <CodeXml size={20} /> 
+                </a>
+                <a
+                  href={profile.linkedin.startsWith('http') ? profile.linkedin : `https://${profile.linkedin}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="rounded-lg p-2 text-[var(--muted)] transition-all hover:text-[var(--accent-2)] hover:bg-[rgba(139,92,246,0.1)] hover:shadow-[0_0_14px_rgba(139,92,246,0.4)]"
+                >
+                  <Link size={20} /> 
+                </a>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+
+          {/* Right Column (Image) */}
+          <motion.div 
+            variants={item}
+            className="shrink-0 relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] mt-8 lg:mt-0"
+          >
+            {/* Background glow for image */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-[var(--accent)] to-emerald-400 opacity-20 blur-2xl animate-pulse" />
+            <motion.div
+              animate={reduce ? {} : { y: [0, -15, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full h-full"
+            >
+              <motion.div 
+                className="relative w-full h-full rounded-3xl overflow-hidden border border-[var(--glass-border)] bg-[var(--card-bg)] shadow-2xl"
+                whileHover={{ scale: 1.03, rotate: -2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                <Image 
+                  src="/profile.jpg"
+                  alt={profile.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 400px"
+                  priority
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
 
         {/* Stats grid */}
         <motion.div
           variants={item}
-          className="mt-16 grid gap-4 sm:grid-cols-3"
+          className="grid gap-4 sm:grid-cols-3"
         >
           {profile.facts.map((fact, i) => (
             <div
